@@ -13,7 +13,7 @@ const font=localFont({
 
 export default function Home() {
   return (
-    <div > 
+    <div> 
       <ScrollAnimation>
         <Container className={font.className}>
           <Header />
@@ -21,15 +21,6 @@ export default function Home() {
           <StatusSection />
           <CollectionSection/>
         </Container>
-
-        {/* <Image
-          className="md:-mt-119 md:w-35 lg:-mt-98 lg:w-45 xl:-mt-74 xl:w-65 2xl:-mt-59 2xl:w-67 transition-all duration-500"
-          src="/Blue_necklace.png"
-          width={100}
-          height={100}
-          priority
-          alt="necklace"
-        /> */}
       </ScrollAnimation>
     </div>
   );

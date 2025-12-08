@@ -30,7 +30,7 @@ function Header() {
         />
       </Link>
 
-      <div className="flex gap-7 mt-2 text-black ">
+      <div className="flex gap-7 mt-2 text-lg md:text-2xl text-black ">
         <CiSearch className="cursor-pointer" />
         <CiHeart className="cursor-pointer" />
         <CgShoppingBag className="cursor-pointer" />

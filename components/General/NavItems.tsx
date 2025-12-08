@@ -13,7 +13,7 @@ function NavItems({ className }: { className: React.ReactNode }) {
     return (
       <Link href={item.link} key={idx}>
         <li
-          className="relative text-black hover:text-black cursor-pointer
+          className="relative text-xl text-black hover:text-black cursor-pointer
              hover:after:w-6 after:transition-all after:duration-300 
              after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 
              after:bottom-0 after:w-0 after:h-0.5 after:bg-black after:rounded"
