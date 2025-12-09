@@ -44,7 +44,7 @@ function SideBar() {
   });
 
   return (
-    <aside className="col-span-3 bg-black/10 p-4 rounded-2xl shadow h-fit hover:scale-105 transtion duration-400 ease-in-out">
+    <aside className="hidden md:block bg-black/10 p-4 rounded-2xl shadow h-fit md:w-50 lg:w-60 xl:w-70 hover:scale-105 transtion duration-400 ease-in-out">
       <h3 className="font-semibold mb-2">Accessories</h3>
       <ul className="space-y-2 mb-4">{renderAccessories}</ul>
     </aside>

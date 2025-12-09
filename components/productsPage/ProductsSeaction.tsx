@@ -16,7 +16,7 @@ function ProductsSeaction() {
     return (
       <div
         key={idx}
-        className="hover:scale-105 transtion duration-400 ease-in-out"
+        className="hover:scale-105 transtion duration-400 ease-in-out w-30 md:w-40 lg:w-50 xl:w-70 "
       >
         <div className="w-full h-50 bg-black/20 rounded-lg"></div>
         <div className="flex flex-col items-center rounded-xl p-2 bg-[#FFFFFF] ">
