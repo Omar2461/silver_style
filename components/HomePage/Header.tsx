@@ -4,9 +4,9 @@ import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CgShoppingBag } from "react-icons/cg";
 
-import NavItems from "./NavItems";
+import NavItems from "../General/NavItems";
 import Link from "next/link";
-import Menu from "./Menu";
+import Menu from "../General/Menu";
 
 function Header() {
 

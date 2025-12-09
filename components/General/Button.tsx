@@ -1,14 +1,15 @@
 import React from "react";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
 }
 
-function Button({ children, className }: ButtonProps) {
+function Button({ children, className,...props }: ButtonProps) {
   return (
     <button
-      className={`flex mt-5 lg:w-30 xl:w-32 w-24 xl:p-2 p-1.5 xl:pl-6 xl:text-xl lg:pl-6 lg:text-lg pl-3 cursor-pointer rounded-full transition-all duration-500 ${className}`}
+      className={`flex mt-5  px-4 py-2 cursor-pointer rounded-full transition-all duration-500 ${className}`}
+      {...props}
     >
       {children}
     </button>
@@ -16,3 +17,4 @@ function Button({ children, className }: ButtonProps) {
 }
 
 export default Button;
+       

@@ -1,5 +1,5 @@
 import Container from "@/components/General/Container";
-import Header from "@/components/General/Header";
+import Header from "@/components/HomePage/Header";
 import HeroSection from "@/components/HomePage/heroSection";
 import StatusSection from "@/components/HomePage/StatusSection";
 import ScrollAnimation from "@/components/General/ScrollAnimation";

@@ -17,7 +17,7 @@ function Container({ className,children }: Panelprops) {
     <div
       ref={ref}
       className={`min-h-screen pt-10 pl-5 pr-5 xl:pl-20 xl:pr-20 xl:pb-10 lg:pr-20 lg:pl-20 md:pl-10 md:pr-10
-      bg-[linear-gradient(to_bottom,#ffc9a6_0%,#ffc9a6_5%,#FFFFFF_100%)]
+      bg-[linear-gradient(to_bottom,#ffc9a6_0%,#ffc9a6_5%,#DBDBDB_100%)]
       transition ease-in-out duration-400 ${className}`}
     >
       {children}
