@@ -6,6 +6,7 @@ import { CiMenuKebab } from "react-icons/ci";
 import SideBar from "./SideBar";
 
 import { useSidebar } from "../../context/SidebarContext";
+import SideBarEl from "./SideBarEl";
 
 function Menu({ className }: { className: string }) {
   const { isOpen, toggleSidebar } = useSidebar();
@@ -31,7 +32,7 @@ function Menu({ className }: { className: string }) {
         className={`${className} ${isOpen ? "hidden" : ""}`}
         onClick={toggleSidebar}
       />
-      <SideBar ref={menuRef} />
+      <SideBar ref={menuRef} > <SideBarEl/></SideBar>
     </div>
   );
 }

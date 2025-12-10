@@ -15,7 +15,7 @@ function StatusSection() {
   ));
 
   return (
-    <div className="relative 2xl:mt-33 xl:mt-31 lg:mt-30 md:mt-28 mt-50 w-full">
+    <div className="relative 2xl:mt-33 xl:mt-31 lg:mt-30 md:mt-28 mt-10 w-full">
       <div className="bg-[#ffc9a6] 2xl:w-180 2xl:h-40 xl:w-169 xl:h-40 lg:w-122
          lg:h-30 md:w-100 md:h-27 w-67 h-20 rounded-2xl transition-all duration-500">
         <ul className="flex md:justify-around xl:pt-10 lg:pt-7 md:pt-5 space-x-3 md:space-x-0 text-center transition-all text-black duration-500">

@@ -2,10 +2,13 @@
 
 import { forwardRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import SideBarEl from "./SideBarEl";
 import { useSidebar } from "@/context/SidebarContext";
 
-const SideBar = forwardRef<HTMLDivElement>((_, ref) => {
+interface SideBarProps {
+  children?: React.ReactNode;
+}
+
+const SideBar = forwardRef<HTMLDivElement, SideBarProps>(({ children }, ref) => {
   const { isOpen } = useSidebar();
   const [container, setContainer] = useState<HTMLElement | null>(null);
 
@@ -23,7 +26,8 @@ const SideBar = forwardRef<HTMLDivElement>((_, ref) => {
         transition-transform duration-500 ease-in-out
         ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
-      <SideBarEl />
+      {/* <SideBarEl /> */}
+      {children}
     </div>,
     container
   );

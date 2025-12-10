@@ -8,7 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 function Button({ children, className,...props }: ButtonProps) {
   return (
     <button
-      className={`flex mt-5  px-4 py-2 cursor-pointer rounded-full transition-all duration-500 ${className}`}
+      className={`flex mt-5 px-4  cursor-pointer rounded-full transition-all duration-500 ${className}`}
       {...props}
     >
       {children}

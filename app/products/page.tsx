@@ -13,7 +13,7 @@ function Products() {
       {/* Categories */}
       <CategoriesSeaction />
 {/* className="grid grid-cols-12 gap-6 mt-4" */}
-      <div className="flex gap-6 mt-4 border">
+      <div className="flex gap-6 mt-4 ">
         {/* Sidebar */}
         <SideBar />
 

@@ -7,21 +7,19 @@ import CollectionSection from "@/components/HomePage/CollectionSection";
 
 import localFont from "next/font/local";
 
-const font=localFont({
-    src:"./fonts/Canela-Light-Trial.otf"
-})
+const font = localFont({
+  src: "./fonts/Canela-Light-Trial.otf",
+});
 
 export default function Home() {
   return (
-    <div> 
-      <ScrollAnimation>
-        <Container className={font.className}>
-          <Header />
-          <HeroSection />
-          <StatusSection />
-          <CollectionSection/>
-        </Container>
-      </ScrollAnimation>
-    </div>
+    <ScrollAnimation>
+      <Container className={font.className}>
+        <Header />
+        <HeroSection />
+        <StatusSection />
+        <CollectionSection />
+      </Container>
+    </ScrollAnimation>
   );
 }
