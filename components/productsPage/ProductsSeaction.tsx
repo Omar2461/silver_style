@@ -1,8 +1,12 @@
+"use client";
+
+import { useSidebar } from "@/context/SidebarContext";
 import Button from "../General/Button";
 
 import { CiShoppingBasket } from "react-icons/ci";
 
 function ProductsSeaction() {
+  const { isOpen } = useSidebar();
   const products = [
     { id: 1, title: "Product Title 1", price: 100.0 },
     { id: 2, title: "Product Title 2", price: 150.0 },
@@ -33,7 +37,13 @@ function ProductsSeaction() {
   });
 
   return (
-    <main className="flex flex-wrap justify-around space-y-4 md:space-x-3 md:space-y-8">{renderProducts}</main>
+    <main
+      className={`flex flex-wrap justify-around space-y-4 ${
+        isOpen ? "mt-15 " : ""
+      }md:mt-0 md:space-x-3 md:space-y-8 transtion duration-400`}
+    >
+      {renderProducts}
+    </main>
   );
 }
 

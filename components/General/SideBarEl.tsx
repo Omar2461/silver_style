@@ -8,7 +8,7 @@ function SideBarEl() {
     { title: "Contact", href: "/contact" },
   ];
   const renderLinks = links.map((link, idx) => (
-    <Link key={idx} href={link.href}>
+    <Link key={idx} href={link.href} className="p-3">
       <li className="hover:text-gray-300 cursor-pointer">{link.title}</li>
     </Link>
   ));

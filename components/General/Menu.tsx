@@ -3,19 +3,27 @@
 import { useEffect, useRef } from "react";
 
 import { CiMenuKebab } from "react-icons/ci";
-import SideBar from "./SideBar";
 
 import { useSidebar } from "../../context/SidebarContext";
-import SideBarEl from "./SideBarEl";
 
-function Menu({ className }: { className: string }) {
+interface menuProps {
+  className: string;
+  Component: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>;
+  children?: React.ReactNode;
+}
+
+function Menu({ className, children, Component }: menuProps) {
   const { isOpen, toggleSidebar } = useSidebar();
 
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (event: Event) => {
-      if (isOpen&&menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
         toggleSidebar();
       }
     };
@@ -27,13 +35,19 @@ function Menu({ className }: { className: string }) {
   }, [isOpen, toggleSidebar]);
 
   return (
-    <div>
+    <span>
       <CiMenuKebab
         className={`${className} ${isOpen ? "hidden" : ""}`}
         onClick={toggleSidebar}
       />
-      <SideBar ref={menuRef} > <SideBarEl/></SideBar>
-    </div>
+      <div
+        className={`fixed z-40 ${
+          isOpen ? "visible" : "hidden"
+        }`}
+      >
+        <Component ref={menuRef}/>
+      </div>
+    </span>
   );
 }
 export default Menu;

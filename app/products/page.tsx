@@ -1,7 +1,8 @@
 import Container from "@/components/General/Container";
+import Menu from "@/components/General/Menu";
 import Header from "@/components/productsPage/Header";
 import ProductsSeaction from "@/components/productsPage/ProductsSeaction";
-import SideBar from "@/components/productsPage/SideBar";
+import SideBarPro from "@/components/productsPage/SideBar";
 import CategoriesSeaction from "@/components/productsPage/categoriesSeaction";
 
 function Products() {
@@ -12,13 +13,15 @@ function Products() {
 
       {/* Categories */}
       <CategoriesSeaction />
-{/* className="grid grid-cols-12 gap-6 mt-4" */}
       <div className="flex gap-6 mt-4 ">
         {/* Sidebar */}
-        <SideBar />
+        <SideBarPro className="hidden md:block" />
+
+        <Menu className="md:hidden -mr-5" Component={SideBarPro}/>
+
 
         {/* Products Grid */}
-        <ProductsSeaction/>
+        <ProductsSeaction />
       </div>
     </Container>
   );

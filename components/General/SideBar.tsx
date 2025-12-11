@@ -3,31 +3,35 @@
 import { forwardRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useSidebar } from "@/context/SidebarContext";
+import SideBarEl from "./SideBarEl";
 
 interface SideBarProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const SideBar = forwardRef<HTMLDivElement, SideBarProps>(({ children }, ref) => {
+const SideBar = forwardRef<HTMLDivElement, SideBarProps>(({ className }, ref) => {
   const { isOpen } = useSidebar();
   const [container, setContainer] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const el = document.getElementById("sidebar-root");
     if (el) setContainer(el);
+
   }, []);
 
   if (!container) return null;
+
+  
 
   return createPortal(
     <div
       ref={ref}
       className={`fixed bg-black/80 text-white top-0 left-0 h-full w-[250px]
-        transition-transform duration-500 ease-in-out
+        transition-transform duration-500 ease-in-out z-50 ${className}
         ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
-      {/* <SideBarEl /> */}
-      {children}
+      <SideBarEl />
     </div>,
     container
   );
