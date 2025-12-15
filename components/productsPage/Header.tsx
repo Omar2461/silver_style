@@ -1,15 +1,20 @@
 "use client";
 
-import { useSidebar } from "@/context/SidebarContext";
 import Image from "next/image";
 
 import { CiShoppingBasket } from "react-icons/ci";
+import Menu from "../General/Menu";
+import ProductsCateg from "./ProductsCateg";
+import SideBar from "../General/SideBar";
 
 function Header() {
-  const { isOpen } = useSidebar();
   return (
     <header className="flex justify-between items-center mb-6">
-      <a href="./" className={`${isOpen?"hidden":""}`}>
+      <Menu className="md:hidden" Component={SideBar}>
+        <ProductsCateg />
+      </Menu>
+
+      <a href="./">
         <Image
           src="/silverStyle.svg"
           className="rounded-full cursor-pointer transition-all duration-500"
@@ -23,9 +28,9 @@ function Header() {
       <input
         type="text"
         placeholder="Search"
-        className={`w-1/3 rounded-full px-4 py-2 border border-gray-600 shadow-sm -mr-32 md:mr-0
+        className={`w-1/3 rounded-full px-4 py-2 border border-gray-600 shadow-sm  md:mr-0
         focus:outline-none focus:border-black/10 focus:bg-black/10 hover:bg-black/10
-         hover:border-black/10 ${isOpen?"ml-40":""} transition-all duration-500`}
+         hover:border-black/10 transition-all duration-500`}
       />
       <div className="flex gap-6 items-center">
         <a className="flex space-x-1 cursor-pointer hover:scale-105 transtion duration-400 ease-in-out">

@@ -8,7 +8,7 @@ import { useSidebar } from "../../context/SidebarContext";
 
 interface menuProps {
   className: string;
-  Component: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>;
+  Component: React.ForwardRefExoticComponent<React.PropsWithChildren<React.RefAttributes<HTMLDivElement>>>;
   children?: React.ReactNode;
 }
 
@@ -45,7 +45,7 @@ function Menu({ className, children, Component }: menuProps) {
           isOpen ? "visible" : "hidden"
         }`}
       >
-        <Component ref={menuRef}/>
+        <Component ref={menuRef}>{children}</Component>
       </div>
     </span>
   );

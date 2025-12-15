@@ -1,12 +1,10 @@
 "use client";
 
-import { useSidebar } from "@/context/SidebarContext";
 import Button from "../General/Button";
 
 import { useState } from "react";
 
 function CategoriesSeaction() {
-  const { isOpen } = useSidebar();
   const [active, setActive] = useState<string | null>(null);
 
   const Categories = ["All Categories", "Silver"];
@@ -29,7 +27,7 @@ function CategoriesSeaction() {
   });
   return (
     <div
-      className={`flex gap-2 overflow-x-auto pb-4 w-fit ${isOpen?"ml-[132px]":""} transtion duration-400`}
+      className={`flex gap-2 overflow-x-auto pb-4 w-fit transtion duration-400`}
     >
       {renderCategories}
     </div>

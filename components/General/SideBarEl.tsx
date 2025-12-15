@@ -1,3 +1,6 @@
+"use client";
+
+import { useSidebar } from "@/context/SidebarContext";
 import Link from "next/link";
 
 function SideBarEl() {
@@ -7,9 +10,12 @@ function SideBarEl() {
     { title: "About", href: "/about" },
     { title: "Contact", href: "/contact" },
   ];
+
+  const { toggleSidebar } = useSidebar();
+
   const renderLinks = links.map((link, idx) => (
     <Link key={idx} href={link.href} className="p-3">
-      <li className="hover:text-gray-300 cursor-pointer">{link.title}</li>
+      <li className="hover:text-gray-300 cursor-pointer" onClick={()=>{toggleSidebar()}}>{link.title}</li>
     </Link>
   ));
 

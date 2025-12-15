@@ -8,13 +8,14 @@ import NavItems from "../General/NavItems";
 import Link from "next/link";
 import Menu from "../General/Menu";
 import SideBarHome from "../General/SideBar";
+import SideBarEl from "../General/SideBarEl";
 
 
 function Header() {
   return (
     <div className="flex w-full justify-between items-center lg:text-[20px] xl:text-[23px] pr-5 transition-all duration-500">
       <div>
-        <Menu className="md:hidden" Component={SideBarHome}/>
+        <Menu className="md:hidden" Component={SideBarHome}><SideBarEl/></Menu>
         <NavItems className="hidden md:flex" />
       </div>
 
