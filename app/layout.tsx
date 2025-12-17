@@ -1,5 +1,9 @@
+"use client"
+
 import "./globals.css";
 import { SidebarProvider } from "@/context/SidebarContext";
+import { Provider } from "react-redux";
+import {store} from "../store"
 
 export default function RootLayout({
   children,
@@ -9,10 +13,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SidebarProvider>
+        <Provider store={store}>
+          <SidebarProvider>
           {children}
           <div id="sidebar-root" />
         </SidebarProvider>
+        </Provider>
+        
       </body>
     </html>
   );
