@@ -15,19 +15,6 @@ const categoryApi = createApi({
       query: () => "/categories",
     }),
   }),
-  //   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
-  //   endpoints(builder) {
-  //     return {
-  //       fetchCategories: builder.query({
-  //         query: () => {
-  //           return {
-  //             url: "/categories",
-  //             method: "GET",
-  //           };
-  //         },
-  //       }),
-  //     };
-  //   },
 });
 
 export const { useGetCategoriesQuery  } = categoryApi;

@@ -14,7 +14,7 @@ const font = localFont({
 export default function Home() {
   return (
     <ScrollAnimation>
-      <Container className={font.className}>
+      <Container className={`bg-[linear-gradient(to_bottom,#ffc9a6_0%,#ffc9a6_5%,#DBDBDB_100%)] ${font.className}`}>
         <Header />
         <HeroSection />
         <StatusSection />

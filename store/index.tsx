@@ -1,18 +1,27 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import { categoryReducer } from "./slices/categoriSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { categoryApi } from "./apis/categoruApi";
+import { typeApi } from "./apis/typeApi";
+import { productsApi } from "./apis/productApi";
 
 export const store = configureStore({
   reducer: {
-    // categories: categoryReducer,
-    [categoryApi.reducerPath]:categoryApi.reducer
+    [categoryApi.reducerPath]: categoryApi.reducer,
+    [typeApi.reducerPath]: typeApi.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
   },
-  middleware:(getDefaultMiddleware)=>{
- return getDefaultMiddleware().concat(categoryApi.middleware)
-  }
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware()
+      .concat(categoryApi.middleware)
+      .concat(typeApi.middleware)
+      .concat(productsApi.middleware);
+  },
 });
 
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);
 
-export {useGetCategoriesQuery} from './apis/categoruApi';
+export { useGetCategoriesQuery } from "./apis/categoruApi";
+
+export { useGetTypesQuery } from "./apis/typeApi";
+
+export { useGetProductsQuery } from "./apis/productApi";

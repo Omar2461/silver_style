@@ -7,7 +7,7 @@ import { CiMenuKebab } from "react-icons/ci";
 import { useSidebar } from "../../context/SidebarContext";
 
 interface menuProps {
-  className: string;
+  className?: string;
   Component: React.ForwardRefExoticComponent<React.PropsWithChildren<React.RefAttributes<HTMLDivElement>>>;
   children?: React.ReactNode;
 }

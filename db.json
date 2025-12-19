@@ -1,10 +1,36 @@
 {
-  "products": [
-    { "id": 1, "title": "Product 1", "price": 100, "categoryId": 1 }
+  "types": [
+    { "id": 1, "name": "Silver" },
+    { "id": 2, "name": "Gold" },
+    { "id": 3, "name": "Platinum" }
   ],
   "categories": [
     { "id": 1, "name": "Necklaces" },
-    { "id": 2, "name": "Rings" }
+    { "id": 2, "name": "Rings" },
+    { "id": 3, "name": "Earrings" },
+    { "id": 4, "name": "Bracelets" }
   ],
-  "Images":[{}]
+  "products": [
+    {
+      "id": 1,
+      "name": "Silver Necklace",
+      "categoryId": 1,
+      "typeId": 1,
+      "price": 250
+    },
+    {
+      "id": 2,
+      "name": "Gold Necklace",
+      "categoryId": 1,
+      "typeId": 2,
+      "price": 300
+    },
+    {
+      "id": 3,
+      "name": "Platinum Ring",
+      "categoryId": 2,
+      "typeId": 3,
+      "price": 500
+    }
+  ]
 }

@@ -1,54 +1,64 @@
 "use client";
 
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect } from "react";
 import { useSidebar } from "@/context/SidebarContext";
+
+import { useGetCategoriesQuery } from "@/store";
+
 import { FaCheck } from "react-icons/fa";
+import { useSelected } from "@/context/SelectedContext";
 
 interface SideBarProps {
   className?: string;
 }
 
+interface CategoryType {
+  name: string;
+  id: number;
+}
+
 const SideBar = forwardRef<HTMLElement, SideBarProps>(({ className }, ref) => {
   const { isOpen } = useSidebar();
-  const [selected, setSelected] = useState<string[]>([
-    "Neaclace",
-    "Bracelet",
-    "Earrings",
-    "Ring",
-  ]);
+  const { selected, toggleItem } = useSelected();
 
-  const Accessories = ["Neaclace", "Bracelet", "Earrings", "Ring"];
+// console.log(selected)
 
-  const handleClick = (item: string) => {
-    if (selected.includes(item)) {
-      setSelected((prev) => prev.filter((i) => i !== item));
-    } else {
-      setSelected((prev) => [...prev, item]);
-    }
+  const { data: categories, error, isFetching } = useGetCategoriesQuery();
+
+  // useEffect(() => {
+  //   if (categories && categories.length > 0) {
+  //     setSelected(categories.map((c) => c.id) ?? []);
+  //   }
+  // }, [categories, selected, setSelected]);
+
+  const Accessories = categories?.map((el) => el);
+
+  const handleClick = (item:CategoryType) => {
+    toggleItem(item.id);
   };
 
-  const renderAccessories = Accessories.map((el, idx) => (
+  const renderAccessories = Accessories?.map((el, idx) => (
     <li key={idx} className="flex justify-between">
-      <span>{el}</span>
+      <span>{el.name}</span>
       <span
         className={`w-5 md:w-6 md:h-6 rounded-lg flex items-center justify-center transition-all duration-400 ${
-          selected.includes(el) ? "bg-gray-200" : "bg-black/10"
+          selected.includes(el.id) ? "bg-gray-200" : "bg-black/10"
         }`}
       >
         <input
           type="checkbox"
           onChange={() => handleClick(el)}
-          checked={selected.includes(el)}
+          checked={selected.includes(el.id)}
           className="absolute opacity-0 cursor-pointer"
         />
-        {selected.includes(el) && <FaCheck className="text-black" />}
+        {selected.includes(el.id) && <FaCheck className="text-black" />}
       </span>
     </li>
   ));
 
   return (
     <aside
-      ref={ref} 
+      ref={ref}
       className={`${
         isOpen
           ? "bg-black/80 fixed shadow h-fit rounded-xl p-2 text-white top-10 left-2 w-[140px]"

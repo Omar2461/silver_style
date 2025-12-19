@@ -6,7 +6,7 @@ import CategoriesSeaction from "@/components/productsPage/categoriesSeaction";
 
 function Products() {
   return (
-    <Container>
+    <Container className="bg-[linear-gradient(to_bottom,#ffc9a6_0%,#ffc9a6_5%,#DBDBDB_100%)]">
       <Header />
       <CategoriesSeaction />
       <div className="flex gap-6 mt-4 ">
