@@ -1,14 +1,35 @@
 {
   "types": [
-    { "id": 1, "name": "Silver" },
-    { "id": 2, "name": "Gold" },
-    { "id": 3, "name": "Platinum" }
+    {
+      "id": 1,
+      "name": "Silver"
+    },
+    {
+      "id": 2,
+      "name": "Gold"
+    },
+    {
+      "id": 3,
+      "name": "Platinum"
+    }
   ],
   "categories": [
-    { "id": 1, "name": "Necklaces" },
-    { "id": 2, "name": "Rings" },
-    { "id": 3, "name": "Earrings" },
-    { "id": 4, "name": "Bracelets" }
+    {
+      "id": 1,
+      "name": "Necklaces"
+    },
+    {
+      "id": 2,
+      "name": "Rings"
+    },
+    {
+      "id": 3,
+      "name": "Earrings"
+    },
+    {
+      "id": 4,
+      "name": "Bracelets"
+    }
   ],
   "products": [
     {
@@ -31,6 +52,18 @@
       "categoryId": 2,
       "typeId": 3,
       "price": 500
+    },
+    {
+      "id": 4,
+      "name": "omar",
+      "categoryId": 2,
+      "typeId": 2,
+      "price": 5124
+    },
+    {
+      "id": 5,
+      "name": "okokj",
+      "price": 5420
     }
   ]
 }

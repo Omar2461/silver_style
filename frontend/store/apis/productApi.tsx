@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export type Product = {
-  id: number;
   name: string;
   categoryId: number;
   typeId: number;
@@ -24,7 +23,6 @@ const productsApi = createApi({
           url: "/products",
           method: "POST",
           body: {
-            id: product.id,
             name: product.name,
             categoryId: product.categoryId,
             typeId: product.typeId,
@@ -45,6 +43,6 @@ const productsApi = createApi({
   }),
 });
 
-export const { useGetProductsQuery } = productsApi;
+export const { useGetProductsQuery,useAddProductMutation } = productsApi;
 
 export { productsApi };

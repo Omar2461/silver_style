@@ -24,4 +24,4 @@ export { useGetCategoriesQuery } from "./apis/categoruApi";
 
 export { useGetTypesQuery } from "./apis/typeApi";
 
-export { useGetProductsQuery } from "./apis/productApi";
+export { useGetProductsQuery,useAddProductMutation } from "./apis/productApi";

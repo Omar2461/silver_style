@@ -6,10 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-// import { useTranslation } from "react-i18next";
+
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import type { SerializedError } from "@reduxjs/toolkit";
 
 interface DropdownOption {
   name: string;
+  id: number;
 }
 
 interface DropdownProps {
@@ -17,6 +20,10 @@ interface DropdownProps {
   className?: string;
   defaultValue?: string;
   shouldHandleClick?: boolean;
+  isFetching?: boolean;
+  error?: FetchBaseQueryError | SerializedError | null;
+  selectFunc?: (name: string,id:number) => void;
+  optionTiltle: string;
 }
 
 function Dropdown({
@@ -24,21 +31,20 @@ function Dropdown({
   className,
   defaultValue,
   shouldHandleClick = true,
+  selectFunc,
+  optionTiltle,
 }: DropdownProps) {
-const [selected, setSelected] = useState<string>(defaultValue ?? "");
+  const [selected, setSelected] = useState<string>(defaultValue ?? "");
 
   const [dropOpen, setDropOpen] = useState(false);
 
-  // const { t, i18n } = useTranslation();
-
   const divEl = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
 
- useEffect(() => {
-  if (defaultValue !== undefined && defaultValue !== selected) {
-    setSelected(defaultValue);
-  }
-}, [defaultValue]);
-
+  useEffect(() => {
+    if (defaultValue !== undefined && defaultValue !== selected) {
+      setSelected(defaultValue);
+    }
+  }, [defaultValue]);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -59,25 +65,32 @@ const [selected, setSelected] = useState<string>(defaultValue ?? "");
     };
   }, [dropOpen]);
 
-  const handleSelect = (title: string) => {
+  const handleSelect = (title: string,id:number) => {
     setSelected(title);
     setDropOpen(false);
+    selectFunc?.(optionTiltle,id);
   };
 
   const handleDropdownClick = () => {
     setDropOpen((prev) => !prev);
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLLIElement>, name: string) => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLLIElement>,
+    name: string,
+    itemId: number
+  ) => {
     if (!shouldHandleClick) {
       e.stopPropagation();
       return;
     }
-    handleSelect(name);
+    handleSelect(name, itemId);
   };
 
-  const renderOptions = options.map(({ name }, idx) => (
-    <li className="w-full" key={idx} onClick={(e) => handleClick(e, name)}>
+  // console.log(options);
+
+  const renderOptions = options.map(({ name, id }, idx) => (
+    <li className="w-full" key={idx} onClick={(e) => handleClick(e, name, id)}>
       <Panel
         className={`bg-white border border-gray-300 text-black md:w-90 lg:w-90 rounded-xl p-3`}
       >
@@ -97,17 +110,15 @@ const [selected, setSelected] = useState<string>(defaultValue ?? "");
         {selected}
 
         {dropOpen ? (
-          <IoIosArrowUp
-            className={`absolute text-lg top-1 right-5`}
-          />
+          <IoIosArrowUp className={`absolute text-lg top-1 right-5`} />
         ) : (
-          <IoIosArrowDown
-            className={`absolute text-lg top-1 right-5`}
-          />
+          <IoIosArrowDown className={`absolute text-lg top-1 right-5`} />
         )}
       </Panel>
       <ol
-        className={`flex flex-col mt-2 gap-1 w-full  ${!dropOpen ? "hidden" : ""}`}
+        className={`flex flex-col mt-2 gap-1 w-full  ${
+          !dropOpen ? "hidden" : ""
+        }`}
       >
         <AnimatePresence>
           {dropOpen && (
