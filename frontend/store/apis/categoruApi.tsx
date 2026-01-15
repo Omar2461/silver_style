@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export type Category = {
   id: number;
   name: string;
+  sizes: string[];
 };
 
 const categoryApi = createApi({
@@ -14,8 +15,11 @@ const categoryApi = createApi({
     getCategories: builder.query<Category[], void>({
       query: () => "/categories",
     }),
+    getCategoryById: builder.query<Category, number>({
+      query: (id) => `/categories/${id}`,
+    }),
   }),
 });
 
-export const { useGetCategoriesQuery  } = categoryApi;
+export const { useGetCategoriesQuery, useGetCategoryByIdQuery } = categoryApi;
 export { categoryApi };

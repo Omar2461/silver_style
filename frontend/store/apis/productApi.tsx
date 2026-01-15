@@ -1,10 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export type Product = {
+  id: number;
   name: string;
   categoryId: number;
   typeId: number;
   price: number;
+  description?: string;
+  // sizes:string[];
 };
 
 export type Category = {
@@ -40,9 +43,16 @@ const productsApi = createApi({
         };
       },
     }),
+    getProductById: builder.query<Product, number>({
+      query: (id) => {
+        return {
+          url: `/products/${id}`,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetProductsQuery,useAddProductMutation } = productsApi;
+export const { useGetProductsQuery,useGetProductByIdQuery,useAddProductMutation } = productsApi;
 
 export { productsApi };

@@ -1,20 +1,31 @@
 "use client";
 
+import { useSelected } from "@/context/SelectedContext";
 import { useSidebar } from "@/context/SidebarContext";
+import { useGetCategoriesQuery } from "@/store";
 
 function ProductsCateg() {
-  const categories = [
-    "All Products",
-    "Neacklace",
-    "Bracelet",
-    "Earrings",
-    "Ring",
-  ];
-
   const { toggleSidebar } = useSidebar();
-  const renderLinks = categories.map((el, idx) => (
-    <li key={idx} className="hover:text-gray-300 cursor-pointer" onClick={()=>{toggleSidebar()}}>
-      {el}
+
+  const { data: categories, error, isFetching } = useGetCategoriesQuery();
+  const { selected, toggleItem } = useSelected();
+
+  const Accessories = categories?.map((el) => el);
+
+  if (isFetching) return <p>Loading...</p>;
+  if (error) return <p>Error loading categories</p>;
+
+
+  const renderLinks = Accessories?.map((el, idx) => (
+    <li
+      key={idx}
+      onClick={() => {
+        toggleSidebar();
+        toggleItem(el.id)
+      }}
+      className="hover:text-gray-300 cursor-pointer"
+    >
+      {el.name}
     </li>
   ));
 

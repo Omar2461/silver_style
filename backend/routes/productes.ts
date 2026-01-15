@@ -1,10 +1,12 @@
 import express from "express";
-import { check, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 
 import fs from "fs";
 import path from "path";
 
 import { readDb } from "../helper/readDb";
+
+import { validators } from "./validators";
 
 const router = express.Router();
 
@@ -15,6 +17,9 @@ type Product = {
   typeId: number;
   price: number;
 };
+
+const { requireName, requirePrice, requireCategoryId, requireTypeId } =
+  validators;
 
 router.get("/", (req, res) => {
   const data = readDb();
@@ -36,25 +41,28 @@ router.get("/", (req, res) => {
   res.json(filtered);
 });
 
+router.get("/:id", (req, res) => {
+  const data = readDb();
+  const products: Product[] = data.products;
+
+  const productId = parseInt(req.params.id);
+
+  const product = products.find((p) => p.id === productId);
+
+  if (!product) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+  res.json(product);
+});
+
 router.post(
   "/",
-  check("name")
-    .notEmpty()
-    .not()
-    .isNumeric()
-    .trim()
-    .withMessage("Must pass a valid product name"),
-  check("price")
-    .isNumeric()
-    .custom((price) => {
-      if (price <= 0) {
-        throw new Error("Must pass a valid price");
-      }
-      return true;
-    }),
+  requireName,
+  requirePrice,
+  requireCategoryId,
+  requireTypeId,
   (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -67,7 +75,6 @@ router.post(
       ? Math.max(...products.map((p) => p.id)) + 1
       : 1;
 
-    console.log("newId::", newId);
     const newProduct = { id: newId, ...req.body };
 
     products.push(newProduct);

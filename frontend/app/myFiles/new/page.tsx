@@ -12,6 +12,7 @@ import { useGetTypesQuery } from "@/store";
 import { useAddProductMutation } from "@/store";
 
 import Button from "@/components/General/Button";
+import Geterror from "@/components/General/Geterror";
 
 type Product = {
   name: string;
@@ -24,10 +25,15 @@ type SelectedItem = {
   [title: string]: number;
 };
 
+type ErrorResponse = {
+  errors: string[];
+};
+
 function Page() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState<number>(0);
   const [selectedItems, setSelectedItems] = useState<SelectedItem>({});
+  const [submotted, setSubmotted] = useState(false);
 
   const {
     data: categoryData,
@@ -72,7 +78,17 @@ function Page() {
     setName("");
     setPrice(0);
     setSelectedItems({});
+    setSubmotted(true);
   };
+
+  const Errors =
+    resultError && typeof resultError === "object" && "data" in resultError
+      ? typeof resultError.data === "object" &&
+        resultError.data &&
+        "errors" in resultError.data
+        ? (resultError.data as ErrorResponse).errors
+        : resultError
+      : resultError;
 
   return (
     <Container className="bg-white">
@@ -89,6 +105,7 @@ function Page() {
             onChange={handleNamechange}
             placeholder="Enter Product name"
           />
+          <Geterror name="name" error={Errors} />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -100,7 +117,10 @@ function Page() {
             className="bg-gray-200 p-5"
             options={types}
             selectFunc={handleSelect}
+            submotted={submotted}
           />
+
+          <Geterror name="typeId" error={Errors} />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -112,7 +132,9 @@ function Page() {
             className="bg-gray-200 p-5"
             options={categories}
             selectFunc={handleSelect}
+            submotted={submotted}
           />
+          <Geterror name="categoryId" error={Errors} />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -124,6 +146,7 @@ function Page() {
             onChange={handlePricechange}
             placeholder="Enter product price"
           />
+          <Geterror name="price" error={Errors} />
         </div>
 
         <div className="flex flex-col gap-2">

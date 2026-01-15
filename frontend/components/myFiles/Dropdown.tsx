@@ -24,6 +24,7 @@ interface DropdownProps {
   error?: FetchBaseQueryError | SerializedError | null;
   selectFunc?: (name: string,id:number) => void;
   optionTiltle: string;
+  submotted?: boolean;
 }
 
 function Dropdown({
@@ -33,12 +34,17 @@ function Dropdown({
   shouldHandleClick = true,
   selectFunc,
   optionTiltle,
+  submotted,
 }: DropdownProps) {
   const [selected, setSelected] = useState<string>(defaultValue ?? "");
 
   const [dropOpen, setDropOpen] = useState(false);
 
   const divEl = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+
+  if (submotted && selected === "") {
+    setSelected("Select " + optionTiltle);
+  }
 
   useEffect(() => {
     if (defaultValue !== undefined && defaultValue !== selected) {

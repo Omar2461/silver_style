@@ -1,7 +1,6 @@
 "use client";
 
-import { forwardRef, useEffect } from "react";
-import { useSidebar } from "@/context/SidebarContext";
+import { forwardRef } from "react";
 
 import { useGetCategoriesQuery } from "@/store";
 
@@ -18,18 +17,11 @@ interface CategoryType {
 }
 
 const SideBar = forwardRef<HTMLElement, SideBarProps>(({ className }, ref) => {
-  const { isOpen } = useSidebar();
   const { selected, toggleItem } = useSelected();
 
-// console.log(selected)
 
   const { data: categories, error, isFetching } = useGetCategoriesQuery();
 
-  // useEffect(() => {
-  //   if (categories && categories.length > 0) {
-  //     setSelected(categories.map((c) => c.id) ?? []);
-  //   }
-  // }, [categories, selected, setSelected]);
 
   const Accessories = categories?.map((el) => el);
 
@@ -60,9 +52,7 @@ const SideBar = forwardRef<HTMLElement, SideBarProps>(({ className }, ref) => {
     <aside
       ref={ref}
       className={`${
-        isOpen
-          ? "bg-black/80 fixed shadow h-fit rounded-xl p-2 text-white top-10 left-2 w-[140px]"
-          : "bg-black/10 md:p-4 md:rounded-2xl shadow h-fit md:w-65 lg:w-75 xl:w-90"
+         "bg-black/10 md:p-4 md:rounded-2xl shadow h-fit md:w-65 lg:w-75 xl:w-90"
       } hover:scale-105 transition duration-400 ease-in-out ${className}`}
     >
       <h3 className="font-semibold mb-2">Accessories</h3>

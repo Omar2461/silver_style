@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { GoArrowRight } from "react-icons/go";
 
 import Button from "../General/Button";
+import Link from "next/link";
 
 const myFont = localFont({
   src: "../../app/fonts/VeganStylePersonalUse-5Y58.ttf",
@@ -32,17 +33,20 @@ function HeroSection() {
             priority
           />
 
-          <h1 className="ml-10 mt-4 xl:ml-25 lg:ml-21 md:mt-5 md:ml-17 lg:mt-6">New Style</h1>
+          <h1 className="ml-10 mt-4 xl:ml-25 lg:ml-21 md:mt-5 md:ml-17 lg:mt-6">
+            New Style
+          </h1>
         </div>
 
         <p className="mt-5 text-gray-700 w-[63%] text-[12px] md:text-[12px] lg:text-lg xl:text-xl">
-          Anyone can get dressed up and glamorous, but it is how people dress
-          in their days off that.
+          Anyone can get dressed up and glamorous, but it is how people dress in
+          their days off that.
         </p>
-
-        <Button className="bg-black text-white mt-8 hover:bg-gray-400 flex items-center w-fit px-6 py-3">
-          See All <GoArrowRight className="ml-2 mt-1" />
-        </Button>
+        <Link href="/products">
+          <Button className="bg-black text-white mt-8 hover:bg-gray-400 flex items-center w-fit px-6 py-3">
+            See All <GoArrowRight className="ml-2 mt-1" />
+          </Button>
+        </Link>
       </div>
 
       <div className="absolute -right-4 -top-10 md:-right-8 lg:-right-12 xl:right-0 flex gap-2 md:gap-2 mt-10 self-center md:self-start w-fit h-fit ">

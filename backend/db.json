@@ -16,7 +16,8 @@
   "categories": [
     {
       "id": 1,
-      "name": "Necklaces"
+      "name": "Necklaces",
+      "sizes": ["40", "45", "50", "55", "60"]
     },
     {
       "id": 2,
@@ -28,7 +29,8 @@
     },
     {
       "id": 4,
-      "name": "Bracelets"
+      "name": "Bracelets",
+      "sizes": ["17", "18", "19", "20"]
     }
   ],
   "products": [
@@ -37,33 +39,32 @@
       "name": "Silver Necklace",
       "categoryId": 1,
       "typeId": 1,
-      "price": 250
+      "price": 250,
+      "description": "Elegant silver necklace perfect for any occasion."
     },
     {
       "id": 2,
       "name": "Gold Necklace",
       "categoryId": 1,
       "typeId": 2,
-      "price": 300
+      "price": 300,
+      "description": "Beautiful gold necklace for special occasions."
     },
     {
       "id": 3,
       "name": "Platinum Ring",
       "categoryId": 2,
       "typeId": 3,
-      "price": 500
+      "price": 500,
+      "description": "Luxurious platinum ring symbolizing eternal love."
     },
     {
       "id": 4,
-      "name": "omar",
+      "name": "Platinum Ring",
       "categoryId": 2,
-      "typeId": 2,
-      "price": 5124
-    },
-    {
-      "id": 5,
-      "name": "okokj",
-      "price": 5420
+      "typeId": 3,
+      "price": 500,
+      "description": "Luxurious platinum ring symbolizing eternal love."
     }
   ]
 }

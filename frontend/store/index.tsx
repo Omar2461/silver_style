@@ -20,8 +20,8 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { useGetCategoriesQuery } from "./apis/categoruApi";
+export { useGetCategoriesQuery, useGetCategoryByIdQuery } from "./apis/categoruApi";
 
 export { useGetTypesQuery } from "./apis/typeApi";
 
-export { useGetProductsQuery,useAddProductMutation } from "./apis/productApi";
+export { useGetProductsQuery,useGetProductByIdQuery,useAddProductMutation } from "./apis/productApi";
