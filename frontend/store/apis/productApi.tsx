@@ -7,12 +7,16 @@ export type Product = {
   typeId: number;
   price: number;
   description?: string;
-  // sizes:string[];
 };
 
-export type Category = {
-  id: number;
-};
+type GetProductsArgs = {
+  categoryIds?: number[];
+  typeIds?: number;
+}; 
+
+// export type Category = {
+//   id: number;
+// };
 
 const productsApi = createApi({
   reducerPath: "products",
@@ -34,10 +38,14 @@ const productsApi = createApi({
         };
       },
     }),
-    getProducts: builder.query<Product[], number[]>({
-      query: (categoryIds) => {
+    getProducts: builder.query<Product[], GetProductsArgs>({
+      query: ({categoryIds,typeIds}) => {
         const params = new URLSearchParams();
-        categoryIds.forEach((id) => params.append("categoryId", String(id)));
+        categoryIds?.forEach((id) => params.append("categoryId", String(id)));
+
+        if(typeIds!==undefined){
+          params.append("typeId", String(typeIds));
+        }
         return {
           url: `/products?${params.toString()}`,
         };

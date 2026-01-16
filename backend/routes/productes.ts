@@ -34,9 +34,25 @@ router.get("/", (req, res) => {
     }
   }
 
-  const filtered = categoryIds.length
-    ? products.filter((p) => categoryIds.includes(p.categoryId))
-    : products;
+  let typeIds: number[] = [];
+
+  if (req.query.typeId) {
+    if (typeof req.query.typeId === "string") {
+      typeIds = [Number(req.query.typeId)];
+    } else if (Array.isArray(req.query.typeId)) {
+      typeIds = req.query.typeId.map(Number);
+    }
+  }
+
+  const filtered = products.filter((p) => {
+    const matchCategory =
+      categoryIds.length === 0 || categoryIds.includes(p.categoryId);
+
+    const matchType =
+     typeIds.length === 0 || typeIds.includes(p.typeId);
+
+    return matchCategory && matchType;
+  });
 
   res.json(filtered);
 });

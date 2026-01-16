@@ -7,10 +7,16 @@ import { CiShoppingBasket } from "react-icons/ci";
 import { useGetProductsQuery } from "@/store";
 import Skelton from "../General/Skelton";
 import Link from "next/link";
+import { useTypeSelected } from "@/context/TypeSelectedContext";
 
 function ProductsSeaction() {
   const { selected } = useSelected();
-  const { data, isFetching, error } = useGetProductsQuery(selected);
+  const { selected: typeSelected } = useTypeSelected();
+
+  const { data, isFetching, error } = useGetProductsQuery({
+    categoryIds: selected,
+    typeIds: typeSelected,
+  });
 
   let renderProducts;
 

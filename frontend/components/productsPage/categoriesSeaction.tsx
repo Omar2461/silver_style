@@ -6,14 +6,22 @@ import Button from "../General/Button";
 import Skelton from "../General/Skelton";
 
 import { useState } from "react";
+import { useTypeSelected } from "@/context/TypeSelectedContext";
+
+type Typeprops = {
+  name: string;
+  id: number;
+};
 
 function CategoriesSeaction() {
   const [active, setActive] = useState<string | null>(null);
 
   const { data, error, isFetching } = useGetTypesQuery();
+  const { selected, toggleItem } = useTypeSelected();
 
-  const handleClick = (categori: string) => {
-    setActive(categori);
+  const handleClick = (categori: Typeprops) => {
+    setActive(categori.name);
+    toggleItem(categori.id);
   };
 
   let content;
@@ -26,7 +34,7 @@ function CategoriesSeaction() {
       return (
         <Button
           key={category.id}
-          onClick={() => handleClick(category.name)}
+          onClick={() => handleClick(category)}
           className={`border border-gray-600 focus:border-black/10 hover:bg-black/10 hover:border-black/10 
           ${category.name === active ? "bg-black/10 border-black/10" : ""}`}
         >

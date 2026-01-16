@@ -37,7 +37,7 @@ export default function CollectionSection() {
         </div>
 
         <div className="absolute md:right-20 right-25 bottom-0 w-40 md:w-[260px]">
-          <Card className="bg-[#ffc9a6]/40" title=" Discover Amazing Earrings">
+          <Card className="bg-[#ffc9a6]/40" title=" Discover Amazing Bracelets">
             <Image
               src="/bracelet.png"
               width={400}
