@@ -3,11 +3,18 @@ import cors from "cors";
 import productsRouter from "./routes/productes";
 import categoriesRouter from "./routes/categries";
 import typesRouter from "./routes/types";
+import dotenv from "dotenv";
+import connectDB from "./config/db";
+
+
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+connectDB()
 
 app.use("/products", productsRouter);
 app.use("/categories", categoriesRouter);

@@ -5,6 +5,7 @@ import fs from "fs";
 import path from "path";
 
 import { readDb } from "../helper/readDb";
+import Product from "../models/Product";
 
 import { validators } from "./validators";
 
@@ -21,9 +22,8 @@ type Product = {
 const { requireName, requirePrice, requireCategoryId, requireTypeId } =
   validators;
 
-router.get("/", (req, res) => {
-  const data = readDb();
-  const products: Product[] = data.products;
+router.get("/", async(req, res) => {
+  const products: Product[] = await Product.find();
 
   let categoryIds: number[] = [];
   if (req.query.categoryId) {
