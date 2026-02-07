@@ -1,17 +1,16 @@
 import express from "express";
 
-import { readDb } from "../helper/readDb";
+import Type from "../models/Type";
 
 const router = express.Router();
 
 type Types = {
-  id: number;
+  id: string;
   name: string;
 };
 
-router.get("/", (req, res) => {
-  const data = readDb();
-  const types: Types[] = data.types;
+router.get("/", async (req, res) => {
+  const types: Types[] = await Type.find();
 
   res.json(types);
 });

@@ -12,35 +12,39 @@ import { validators } from "./validators";
 const router = express.Router();
 
 type Product = {
-  id: number;
+  _id: string;
   name: string;
-  categoryId: number;
-  typeId: number;
+  categoryId: string;
+  typeId: string;
   price: number;
 };
 
 const { requireName, requirePrice, requireCategoryId, requireTypeId } =
   validators;
 
-router.get("/", async(req, res) => {
+router.get("/", async (req, res) => {
   const products: Product[] = await Product.find();
 
-  let categoryIds: number[] = [];
+  let categoryIds: string[] = [];
   if (req.query.categoryId) {
     if (typeof req.query.categoryId === "string") {
-      categoryIds = [Number(req.query.categoryId)];
+      categoryIds = [req.query.categoryId];
     } else if (Array.isArray(req.query.categoryId)) {
-      categoryIds = req.query.categoryId.map(Number);
+      categoryIds = req.query.categoryId.filter(
+        (id) => typeof id === "string",
+      ) as string[];
     }
   }
 
-  let typeIds: number[] = [];
+  let typeIds: string[] = [];
 
   if (req.query.typeId) {
     if (typeof req.query.typeId === "string") {
-      typeIds = [Number(req.query.typeId)];
+      typeIds = [req.query.typeId];
     } else if (Array.isArray(req.query.typeId)) {
-      typeIds = req.query.typeId.map(Number);
+      typeIds =  req.query.typeId.filter(
+        (id) => typeof id === "string",
+      ) as string[];
     }
   }
 
@@ -48,8 +52,7 @@ router.get("/", async(req, res) => {
     const matchCategory =
       categoryIds.length === 0 || categoryIds.includes(p.categoryId);
 
-    const matchType =
-     typeIds.length === 0 || typeIds.includes(p.typeId);
+    const matchType = typeIds.length === 0 || typeIds.includes(p.typeId);
 
     return matchCategory && matchType;
   });
@@ -57,13 +60,13 @@ router.get("/", async(req, res) => {
   res.json(filtered);
 });
 
-router.get("/:id", (req, res) => {
-  const data = readDb();
-  const products: Product[] = data.products;
+router.get("/:id", async (req, res) => {
+  const products: Product[] = await Product.find();
 
-  const productId = parseInt(req.params.id);
+  const productId = req.params.id;
+  console.log(productId);
 
-  const product = products.find((p) => p.id === productId);
+  const product = products.find((p) => p._id == productId);
 
   if (!product) {
     return res.status(404).json({ message: "Product not found" });
@@ -87,20 +90,20 @@ router.post(
     const data = readDb();
     const products: Product[] = data.products;
 
-    const newId = products.length
-      ? Math.max(...products.map((p) => p.id)) + 1
-      : 1;
+    // const newId = products.length
+    //   ? Math.max(...products.map((p) => p._idid)) + 1
+    //   : 1;
 
-    const newProduct = { id: newId, ...req.body };
+    const newProduct = { ...req.body };
 
     products.push(newProduct);
     fs.writeFileSync(
       path.join(__dirname, "../db.json"),
-      JSON.stringify({ ...data, products }, null, 2)
+      JSON.stringify({ ...data, products }, null, 2),
     );
 
     res.send("Added successfully");
-  }
+  },
 );
 
 export default router;

@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Quantity() {
+interface QuantityProps {
+  onChange: (quantity: number) => void;
+}
+
+function Quantity({ onChange }: QuantityProps) {
   const [quantity, setQuantity] = useState(1);
 
+  useEffect(() => {
+    onChange(quantity);
+  }, [quantity]);
+
   const handleDecreaseQuant = () => {
-    if (quantity == 1) {
+    if (quantity === 1) {
       return;
     } else {
       setQuantity(quantity - 1);
@@ -19,11 +27,11 @@ function Quantity() {
     <div className="flex items-center gap-3 mt-6">
       <span className="font-medium">Quantity</span>
       <div className="flex border rounded">
-        <button className="px-3" onClick={handleDecreaseQuant}>
+        <button className="px-3 cursor-pointer" onClick={handleDecreaseQuant}>
           -
         </button>
         <span className="px-4">{quantity}</span>
-        <button className="px-3" onClick={handleIncreaseQuant}>
+        <button className="px-3 cursor-pointer" onClick={handleIncreaseQuant}>
           +
         </button>
       </div>

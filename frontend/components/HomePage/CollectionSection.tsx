@@ -11,7 +11,7 @@ export default function CollectionSection() {
       <div className="relative w-full max-w-5xl mt-15 min-h-[560px] md:min-h-[800px] lg:min-h-[700px]   ">
 
         <div className="absolute md:left-50 lg:left-85 xl:left-100 left-25 top-0 w-40 md:w-[260px]">
-          <Card className="bg-[#ffc9a6]/40" title="Inspiration with necklaces">
+          <Card className="bg-[#ffc9a6]/40" title="Inspiration with Necklaces">
             <Image
               src="/sparcleNecklace.jpg"
               width={400}

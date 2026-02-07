@@ -21,7 +21,7 @@ function ProductsCateg() {
       key={idx}
       onClick={() => {
         toggleSidebar();
-        toggleItem(el.id)
+        toggleItem(el._id)
       }}
       className="hover:text-gray-300 cursor-pointer"
     >

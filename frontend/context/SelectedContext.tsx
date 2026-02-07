@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type SelectedContextType = {
-  selected: number[]|undefined;
-  toggleItem: (item: number) => void;
-  setSelected: (items: number[]) => void;
+  selected: string[]|undefined;
+  toggleItem: (item: string) => void;
+  setSelected: (items: string[]) => void;
 };
 
 const SelectedContext = createContext<SelectedContextType | undefined>(
@@ -15,9 +15,9 @@ type ProviderProps = {
 };
 
 export const SelectedProvider = ({ children }: ProviderProps) => {
-  const [selected, setSelected] = useState<number[] | undefined>(undefined);
+  const [selected, setSelected] = useState<string[] | undefined>(undefined);
 
-  const toggleItem = (item: number) => {
+  const toggleItem = (item: string) => {
     setSelected((prev) => {
       if (!prev) {
         return [item];

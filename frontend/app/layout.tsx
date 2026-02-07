@@ -7,6 +7,13 @@ import { store } from "../store";
 import { SelectedProvider } from "@/context/SelectedContext";
 import { TypeSelectedProvider } from "@/context/TypeSelectedContext";
 
+import localFont from "next/font/local";
+
+
+const font = localFont({
+  src: "./fonts/Canela-Light-Trial.otf",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -14,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={font.className}>
         <Provider store={store}>
           <TypeSelectedProvider>
             <SelectedProvider>

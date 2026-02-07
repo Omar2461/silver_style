@@ -13,7 +13,7 @@ interface SideBarProps {
 
 interface CategoryType {
   name: string;
-  id: number;
+  _id: string;
 }
 
 const SideBar = forwardRef<HTMLElement, SideBarProps>(({ className }, ref) => {
@@ -24,7 +24,7 @@ const SideBar = forwardRef<HTMLElement, SideBarProps>(({ className }, ref) => {
   const Accessories = categories?.map((el) => el);
 
   const handleClick = (item: CategoryType) => {
-    toggleItem(item.id);
+    toggleItem(item._id);
   };
 
   const renderAccessories = Accessories?.map((el, idx) => (
@@ -32,16 +32,16 @@ const SideBar = forwardRef<HTMLElement, SideBarProps>(({ className }, ref) => {
       <span>{el.name}</span>
       <span
         className={`w-5 md:w-6 md:h-6 rounded-lg flex items-center justify-center transition-all duration-400 ${
-          selected?.includes(el.id) ? "bg-gray-200" : "bg-black/10"
+          selected?.includes(el._id) ? "bg-gray-200" : "bg-black/10"
         }`}
       >
         <input
           type="checkbox"
           onChange={() => handleClick(el)}
-          checked={selected?.includes(el.id)}
+          checked={selected?.includes(el._id) || false}
           className="absolute opacity-0 cursor-pointer"
         />
-        {selected?.includes(el.id) && <FaCheck className="text-black" />}
+        {selected?.includes(el._id) && <FaCheck className="text-black" />}
       </span>
     </li>
   ));

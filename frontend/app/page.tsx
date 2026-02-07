@@ -5,16 +5,14 @@ import StatusSection from "@/components/HomePage/StatusSection";
 import ScrollAnimation from "@/components/General/ScrollAnimation";
 import CollectionSection from "@/components/HomePage/CollectionSection";
 
-import localFont from "next/font/local";
-
-const font = localFont({
-  src: "./fonts/Canela-Light-Trial.otf",
-});
-
 export default function Home() {
   return (
     <ScrollAnimation>
-      <Container className={`bg-[linear-gradient(to_bottom,#ffc9a6_0%,#ffc9a6_5%,#DBDBDB_100%)] ${font.className}`}>
+      <Container
+        className={
+          "bg-[linear-gradient(to_bottom,#ffc9a6_0%,#ffc9a6_5%,#DBDBDB_100%)] "
+        }
+      >
         <Header />
         <HeroSection />
         <StatusSection />

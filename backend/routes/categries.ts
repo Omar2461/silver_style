@@ -1,29 +1,27 @@
 import express from "express";
 
 import { readDb } from "../helper/readDb";
+import Category from "../models/Category";
 
 const router = express.Router();
 
-type Category = {
-  id: number;
+type CategoryType = {
+  _id: string;
   name: string;
   sizes: string[];
 };
 
-router.get("/", (req, res) => {
-  const data = readDb();
-  const categories: Category[] = data.categories;
+router.get("/", async (req, res) => {
+  const categories: CategoryType[] = await Category.find();
 
   res.json(categories);
 });
 
-router.get("/:id", (req, res) => {
-  const data = readDb();
-  const categoryId = parseInt(req.params.id);
+router.get("/:id", async (req, res) => {
+  const categories: CategoryType[] = await Category.find();
+  const categoryId = req.params.id;
 
-  const category = data.categories.find(
-    (cat: Category) => cat.id === categoryId
-  );
+  const category = categories.find((cat) => cat._id == categoryId);
 
   res.json(category);
 });

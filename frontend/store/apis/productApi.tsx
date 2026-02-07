@@ -1,22 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export type Product = {
-  id: number;
+  _id: string;
   name: string;
-  categoryId: number;
+  categoryId: string;
   typeId: number;
   price: number;
   description?: string;
+  image: string;
 };
 
 type GetProductsArgs = {
-  categoryIds?: number[];
+  categoryIds?: string[];
   typeIds?: number;
 }; 
-
-// export type Category = {
-//   id: number;
-// };
 
 const productsApi = createApi({
   reducerPath: "products",
@@ -41,20 +38,20 @@ const productsApi = createApi({
     getProducts: builder.query<Product[], GetProductsArgs>({
       query: ({categoryIds,typeIds}) => {
         const params = new URLSearchParams();
-        categoryIds?.forEach((id) => params.append("categoryId", String(id)));
+        categoryIds?.forEach((id) => params.append("categoryId", id));
 
         if(typeIds!==undefined){
           params.append("typeId", String(typeIds));
         }
         return {
-          url: `/products?${params.toString()}`,
+          url: `/products?${params}`,
         };
       },
     }),
-    getProductById: builder.query<Product, number>({
-      query: (id) => {
+    getProductById: builder.query<Product, string>({
+      query: (_id) => {
         return {
-          url: `/products/${id}`,
+          url: `/products/${_id}`,
         };
       },
     }),

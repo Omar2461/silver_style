@@ -10,7 +10,7 @@ import { useTypeSelected } from "@/context/TypeSelectedContext";
 
 type Typeprops = {
   name: string;
-  id: number;
+  _id: string;
 };
 
 function CategoriesSeaction() {
@@ -19,9 +19,15 @@ function CategoriesSeaction() {
   const { data, error, isFetching } = useGetTypesQuery();
   const { selected, toggleItem } = useTypeSelected();
 
-  const handleClick = (categori: Typeprops) => {
-    setActive(categori.name);
-    toggleItem(categori.id);
+
+  const handleClick = (categori: Typeprops | null) => {
+    if (!categori) {
+      setActive("All Types");
+      toggleItem(undefined)
+    } else {
+      setActive(categori.name);
+      toggleItem(categori._id);
+    }
   };
 
   let content;
@@ -33,7 +39,7 @@ function CategoriesSeaction() {
     content = data?.map((category) => {
       return (
         <Button
-          key={category.id}
+          key={category._id}
           onClick={() => handleClick(category)}
           className={`border border-gray-600 focus:border-black/10 hover:bg-black/10 hover:border-black/10 
           ${category.name === active ? "bg-black/10 border-black/10" : ""}`}
@@ -48,6 +54,13 @@ function CategoriesSeaction() {
     <div
       className={`flex gap-2 overflow-x-auto pb-4 w-fit transtion duration-400`}
     >
+      <Button
+        onClick={() => handleClick(null)}
+        className={`border border-gray-600 focus:border-black/10 hover:bg-black/10 hover:border-black/10 
+          ${active === "All Types" ? "bg-black/10 border-black/10" : ""}`}
+      >
+        All Types
+      </Button>
       {content}
     </div>
   );
