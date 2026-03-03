@@ -61,5 +61,5 @@ Client (Next.js) → REST API (Express) → MongoDB Database
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/silverstyle.git
+git clone https://github.com/Omar2461/silverstyle.git
 cd silverstyle
