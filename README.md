@@ -68,12 +68,3 @@ Client (Next.js) → REST API (Express) → MongoDB Database
 ![Product](screenshots/Product.jpg)
 ![Home](screenshots/Mobile2.jpg)
 ![Home](screenshots/Mobile3.jpg)
-
----
-## 🚀 Getting Started
-
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/Omar2461/silverstyle.git
-cd silverstyle
