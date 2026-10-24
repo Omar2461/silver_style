@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { forwardRef } from "react";
 
-import { useGetCategoriesQuery } from "@/store";
+import { useCategoryStore } from "@/store";
 
 import { FaCheck } from "react-icons/fa";
 import { useSelected } from "@/context/SelectedContext";
+import Skelton from "../General/Skelton";
 
 interface SideBarProps {
   className?: string;
@@ -13,38 +16,50 @@ interface SideBarProps {
 
 interface CategoryType {
   name: string;
-  _id: string;
+  id: number;
 }
 
 const SideBar = forwardRef<HTMLElement, SideBarProps>(({ className }, ref) => {
   const { selected, toggleItem } = useSelected();
+  const { fetchCategories, categories, loading, error } = useCategoryStore();
 
-  const { data: categories, error, isFetching } = useGetCategoriesQuery();
-
-  const Accessories = categories?.map((el) => el);
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const handleClick = (item: CategoryType) => {
-    toggleItem(item._id);
+    toggleItem?.(item.id);
   };
 
-  const renderAccessories = Accessories?.map((el, idx) => (
-    <li key={idx} className="flex justify-between">
-      <span>{el.name}</span>
-      <span
-        className={`w-5 md:w-6 md:h-6 rounded-lg flex items-center justify-center transition-all duration-400 ${
-          selected?.includes(el._id) ? "bg-gray-200" : "bg-black/10"
-        }`}
-      >
-        <input
-          type="checkbox"
-          onChange={() => handleClick(el)}
-          checked={selected?.includes(el._id) || false}
-          className="absolute opacity-0 cursor-pointer"
-        />
-        {selected?.includes(el._id) && <FaCheck className="text-black" />}
-      </span>
-    </li>
-  ));
+  let renderAccessories;
+  if (loading) {
+    renderAccessories = (
+      <Skelton
+        className="md:w-40 lg:w-50 xl:w-70 w-40"
+        times={categories?.length}
+      />
+    );
+  } else if (error) {
+    renderAccessories = <div>Error happend</div>;
+  } else
+    renderAccessories = categories?.map((el, idx) => (
+      <li key={idx} className="flex justify-between">
+        <span>{el.name}</span>
+        <span
+          className={`w-5 md:w-6 md:h-6 rounded-lg flex items-center justify-center transition-all duration-400 ${
+            selected?.includes(el.id) ? "bg-gray-200" : "bg-black/10"
+          }`}
+        >
+          <input
+            type="checkbox"
+            onChange={() => handleClick(el)}
+            checked={selected?.includes(el.id) || false}
+            className="absolute opacity-0 cursor-pointer"
+          />
+          {selected?.includes(el.id) && <FaCheck className="text-black" />}
+        </span>
+      </li>
+    ));
 
   return (
     <aside

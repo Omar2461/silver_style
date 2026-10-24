@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CgShoppingBag } from "react-icons/cg";
-
-import { useGetProductsQuery } from "@/store";
+import { useProductStore } from "@/store/zustand/userProductStore";
+// import { useGetProductsQuery } from "@/store";
 
 function HeaderItems() {
   const [input, setInput] = useState<string | null>(null);
 
-  const { data } = useGetProductsQuery({});
+  const { products } =useProductStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -21,10 +21,10 @@ function HeaderItems() {
     if (!input) {
       return null;
     }
-    const list = data
+    const list = products
       ?.filter((el) => el.name.toLowerCase().includes(input.toLowerCase()))
       .map((el) => (
-        <Link key={el._id} href={`/products/${el._id}`}>
+        <Link key={el.id} href={`/products/${el.id}`}>
           <li className="my-1 ml-4 mr-4 border p-2 rounded-xl hover:scale-105 transtion duration-400 ease-in-out">
             <span>{el.name}</span>
           </li>

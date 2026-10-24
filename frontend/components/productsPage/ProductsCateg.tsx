@@ -2,17 +2,17 @@
 
 import { useSelected } from "@/context/SelectedContext";
 import { useSidebar } from "@/context/SidebarContext";
-import { useGetCategoriesQuery } from "@/store";
+import { useCategoryStore } from "@/store";
 
 function ProductsCateg() {
   const { toggleSidebar } = useSidebar();
-
-  const { data: categories, error, isFetching } = useGetCategoriesQuery();
   const { selected, toggleItem } = useSelected();
+
+const {categories,fetchCategories,error,loading}=useCategoryStore();
 
   const Accessories = categories?.map((el) => el);
 
-  if (isFetching) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading categories</p>;
 
 
@@ -21,7 +21,7 @@ function ProductsCateg() {
       key={idx}
       onClick={() => {
         toggleSidebar();
-        toggleItem(el._id)
+        toggleItem(el.id)
       }}
       className="hover:text-gray-300 cursor-pointer"
     >

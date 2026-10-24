@@ -1,50 +1,52 @@
 "use client";
 
-import { useGetTypesQuery } from "@/store";
+import { useTypeStore } from "@/store";
 
 import Button from "../General/Button";
 import Skelton from "../General/Skelton";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTypeSelected } from "@/context/TypeSelectedContext";
 
-type Typeprops = {
+type materialProps = {
   name: string;
-  _id: string;
+  id: number;
 };
 
 function CategoriesSeaction() {
   const [active, setActive] = useState<string | null>(null);
 
-  const { data, error, isFetching } = useGetTypesQuery();
+  const { fetchMaterials, materials, loading, error } = useTypeStore();
   const { selected, toggleItem } = useTypeSelected();
 
+  useEffect(() => {
+    fetchMaterials();
+  }, [fetchMaterials]);
 
-  const handleClick = (categori: Typeprops | null) => {
-    if (!categori) {
+  const handleClick = (material: materialProps | null) => {
+    if (!material) {
       setActive("All Types");
-      toggleItem(undefined)
+      toggleItem(undefined);
     } else {
-      setActive(categori.name);
-      toggleItem(categori._id);
+      setActive(material.name);
+      toggleItem(material.id);
     }
   };
-
   let content;
-  if (isFetching) {
+  if (loading) {
     content = <Skelton className="rounded-full h-8 w-20" times={3} />;
   } else if (error) {
     content = <div>Error loading categories</div>;
   } else {
-    content = data?.map((category) => {
+    content = materials?.map((material) => {
       return (
         <Button
-          key={category._id}
-          onClick={() => handleClick(category)}
+          key={material.id}
+          onClick={() => handleClick(material)}
           className={`border border-gray-600 focus:border-black/10 hover:bg-black/10 hover:border-black/10 
-          ${category.name === active ? "bg-black/10 border-black/10" : ""}`}
+          ${material.name === active ? "bg-black/10 border-black/10" : ""}`}
         >
-          {category.name}
+          {material.name}
         </Button>
       );
     });

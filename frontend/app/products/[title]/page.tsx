@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+// import { useDotNetStoreState } from "@/store/zustand/useDotNetStroe";
 
 import Container from "@/components/General/Container";
 import HeaderItems from "@/components/General/HeaderItems";
@@ -27,6 +28,8 @@ function Product(props: Props) {
   const [productId, setProductId] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
 
+
+  // const {fetchCategories}=useDotNetStoreState();
   const {
     data: product,
     isLoading,
@@ -45,6 +48,7 @@ function Product(props: Props) {
       setProductId(title);
     };
     getId();
+    // fetchCategories();
   }, [props.params]);
 
   const dispatch = useDispatch();
@@ -59,6 +63,8 @@ function Product(props: Props) {
         quantity: quantity,
       }),
     );
+
+    console.log("Added to cart:");
   };
 
   const handleChange = (num: number) => {

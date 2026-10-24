@@ -6,9 +6,9 @@ import {
 } from "react";
 
 type SelectedContextType = {
-  selected: string | undefined;
-  toggleItem: (item: string) => void;
-  setSelected: (items: string | undefined) => void;
+  selected: number | undefined;
+  toggleItem: (item: number| undefined) => void;
+  setSelected: (items: number | undefined) => void;
 };
 
 const TypeSelectedContext = createContext<SelectedContextType | undefined>(
@@ -16,9 +16,9 @@ const TypeSelectedContext = createContext<SelectedContextType | undefined>(
 );
 
 export const TypeSelectedProvider = ({ children }: { children: ReactNode }) => {
-  const [selected, setSelected] = useState<string | undefined>(undefined);
+  const [selected, setSelected] = useState<number | undefined>(undefined);
 
-  const toggleItem = (item: string) => {
+  const toggleItem = (item: number | undefined) => {
     setSelected((prev) =>
       prev === item ? undefined : item
     );
@@ -33,6 +33,9 @@ export const TypeSelectedProvider = ({ children }: { children: ReactNode }) => {
 
 
 export const useTypeSelected = () => {
-    const context = useContext(TypeSelectedContext);
-    return context;
+   const context = useContext(TypeSelectedContext);
+     if (!context) {
+       throw new Error("useSelected must be used within a SelectedProvider");
+     }
+     return context;
 }

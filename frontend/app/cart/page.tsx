@@ -1,8 +1,14 @@
 "use client";
 
-import Quantity from "@/components/ProductPage/Quantity";
+import { UseSelector } from "react-redux";
+
+import { RootState } from "@/store";
 
 function Page() {
+  // const cart = UseSelector((state:RootState) => {
+  //   console.log(state)
+  // });
+
   return (
     <div className="min-h-screen bg-[#f7f2eb] flex justify-center">
       <div className="w-full max-w-5xl px-4 py-6">
@@ -45,7 +51,7 @@ function Page() {
                 <span>{counter}</span>
                 <button onClick={handleInc}>+</button>
               </div> */}
-              <Quantity />
+              {/* <Quantity /> */}
             </div>
           </div>
         </div>
