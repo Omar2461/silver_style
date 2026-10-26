@@ -1,0 +1,6 @@
+@Silver_Style_HostAddress = http://localhost:5052
+
+GET {{Silver_Style_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
