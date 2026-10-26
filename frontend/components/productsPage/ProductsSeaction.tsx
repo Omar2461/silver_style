@@ -60,7 +60,7 @@ function ProductsSeaction() {
             </div>
             <div className="relative flex flex-col items-center rounded-xl h-16 md:h-18 bg-[#FFFFFF] ">
               <h4 className="font-semibold w-30 text-center">{product.name}</h4>
-              <Button className="absolute bottom-2 text-gray-600 border border-violet-500 w-18 md:w-25 space-x-1 flex justify-center ">
+              <Button className="absolute bottom-2 text-gray-600 border hover:bg-gray-600 hover:text-white w-18 md:w-25 space-x-1 flex justify-center ">
                 <span>
                   <CiShoppingBasket className="text-lg md:text-xl" />
                 </span>

@@ -2,21 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { useDotNetStoreState } from "@/store/zustand/useDotNetStroe";
 
 import Container from "@/components/General/Container";
 import HeaderItems from "@/components/General/HeaderItems";
 import Button from "@/components/General/Button";
 import Quantity from "@/components/ProductPage/Quantity";
 import { skipToken } from "@reduxjs/toolkit/query";
-
-import {
-  useGetProductByIdQuery,
-  useGetCategoryByIdQuery,
-  addToCart,
-} from "@/store";
 import Image from "next/image";
 import Skelton from "@/components/General/Skelton";
+
+import { useProductStore } from "@/store";
+import { number } from "framer-motion";
 
 type Props = {
   params: {
@@ -28,80 +24,69 @@ function Product(props: Props) {
   const [productId, setProductId] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
 
-
-  // const {fetchCategories}=useDotNetStoreState();
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useGetProductByIdQuery(productId!, {
-    skip: productId === null,
-  });
-
-  const { data: category } = useGetCategoryByIdQuery(
-    product?.categoryId ?? skipToken,
-  );
+  const { getProductById, selectedProduct, loading, error } = useProductStore();
 
   useEffect(() => {
     const getId = async () => {
       const { title } = await props.params;
-      setProductId(title);
+      const proId = Number(title);
+      getProductById(proId);
+      //   setProductId(title);
     };
     getId();
-    // fetchCategories();
-  }, [props.params]);
+  }, []);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleClick = () => {
-    dispatch(
-      addToCart({
-        _id: product?._id,
-        name: product?.name,
-        price: product?.price,
-        image: product?.image,
-        quantity: quantity,
-      }),
-    );
+  // const handleClick = () => {
+  //   dispatch(
+  //     addToCart({
+  //       _id: product?._id,
+  //       name: product?.name,
+  //       price: product?.price,
+  //       image: product?.image,
+  //       quantity: quantity,
+  //     }),
+  //   );
 
-    console.log("Added to cart:");
-  };
+  //   console.log("Added to cart:");
+  // };
 
   const handleChange = (num: number) => {
     setQuantity(num);
   };
 
   const renderProduct = () => {
-    if (isLoading) {
+    if (loading) {
       return <p>Loading...</p>;
     } else {
-      const renderSizes = category?.sizes?.map((size, idx) => {
-        return (
-          <button
-            key={idx}
-            className="border px-4 py-2 rounded hover:bg-black hover:text-white cursor-pointer"
-          >
-            {size}
-          </button>
-        );
-      });
+      // const renderSizes = selectedProduct?.sizes?.map((size, idx) => {
+      //   return (
+      //     <button
+      //       key={idx}
+      //       className="border px-4 py-2 rounded hover:bg-black hover:text-white cursor-pointer"
+      //     >
+      //       {size}
+      //     </button>
+      //   );
+      // });
 
       return (
         <>
-          <p className="text-3xl font-bold mt-6">${product?.price}</p>
+          <p className="text-3xl font-bold mt-6">${selectedProduct?.price}</p>
 
           {/* <!-- Description --> */}
           <p className="text-gray-600 mt-4 leading-relaxed text-sm">
-            {product?.description}
+            {selectedProduct?.details}
           </p>
 
           <div className="mt-6">
-            {product?.name.toLowerCase().includes("ring") ? (
+            {selectedProduct?.name.toLowerCase().includes("ring") ? (
               ""
             ) : (
               <>
                 <p className="font-medium mb-2">Select Size</p>
-                <div className="flex flex-wrap gap-3">{renderSizes}</div>
+                {/* <div className="flex flex-wrap gap-3">{renderSizes}</div> */}
               </>
             )}
           </div>
@@ -116,10 +101,10 @@ function Product(props: Props) {
   } else {
     content = (
       <>
-        {product?.image ? (
+        {selectedProduct?.image ? (
           <Image
-            src={product.image}
-            alt={product.name}
+            src={selectedProduct.image}
+            alt={selectedProduct.name}
             width={400}
             height={400}
             className="w-full max-w-md object-contain rounded-2xl"
@@ -136,7 +121,7 @@ function Product(props: Props) {
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Button
-              onClick={handleClick}
+              // onClick={handleClick}
               className="bg-black text-white hover:bg-gray-500 px-6 py-3 w-full sm:w-auto transtion duration-400"
             >
               Buy Now
