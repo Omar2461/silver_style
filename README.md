@@ -2,7 +2,8 @@
 
 ## 📌 Project Overview
 
-SilverStyle is a full-stack e-commerce web application built using **Next.js (Frontend)** and **Node.js + Express (Backend)** with **MongoDB** as the database.
+SilverStyle is a full-stack e-commerce web application built using **Next.js (Frontend)** and **ASP.NET Core (Backend)** with **MySQL** as the database.
+.
 
 The application allows users to browse products, add items to cart, and manage their shopping cart.
 
@@ -13,7 +14,7 @@ The project follows clean architecture principles and demonstrates real-world fu
 ## ✨ Features
 
 ### 🛍 Product Management
-- Fetch products from MongoDB
+- Fetch products from MySQL
 - Product details page
 - RESTful API structure
 
@@ -21,7 +22,8 @@ The project follows clean architecture principles and demonstrates real-world fu
 - Add to cart
 - Remove from cart
 - Update product quantity
-- Global state management using Redux Toolkit
+- Global state management using Zustand
+
 
 ### 📱 UI/UX
 - Fully responsive design
@@ -35,20 +37,20 @@ The project follows clean architecture principles and demonstrates real-world fu
 ### Frontend
 - Next.js
 - TypeScript
-- Redux Toolkit
+- Zustand
 - Tailwind CSS
 
 ### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
+- C#
+- ASP.NET Core
+- MySQL
+- Entity Framework Core
 
 ---
 
 ## 🏗 Architecture
 
-Client (Next.js) → REST API (Express) → MongoDB Database
+Client (Next.js) → REST API (ASP.NET Core) → MySQL Database
 
 - Frontend communicates with backend via REST APIs
 - Backend handles database operations
