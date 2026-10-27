@@ -1,18 +1,9 @@
 ﻿using Silver_Style.Features.OrderItems;
-
 using Silver_Style.Features.Clients;
 
 namespace Silver_Style.Features.Orders
 {
 
-    public enum OrderStatus
-    {
-        Pending,
-        Placed,
-        Paid,
-        Shipped,
-        Cancelled
-    }
     public class Order
     {
         public int Id { get; set; }

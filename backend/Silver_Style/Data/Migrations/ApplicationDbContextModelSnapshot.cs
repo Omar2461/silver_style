@@ -142,16 +142,13 @@ namespace Silver_Style.Migrations
 
             modelBuilder.Entity("Silver_Style.Features.OrderItems.OrderItem", b =>
                 {
-                    b.Property<int>("Order_Id")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Product_Id")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quntity")
@@ -160,7 +157,7 @@ namespace Silver_Style.Migrations
                     b.Property<decimal>("UniePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Order_Id", "Product_Id");
+                    b.HasKey("Id", "ProductId");
 
                     b.HasIndex("OrderId");
 
@@ -325,13 +322,19 @@ namespace Silver_Style.Migrations
 
             modelBuilder.Entity("Silver_Style.Features.OrderItems.OrderItem", b =>
                 {
-                    b.HasOne("Silver_Style.Features.Orders.Order", null)
+                    b.HasOne("Silver_Style.Features.Orders.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Silver_Style.Features.Products.Product", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Silver_Style.Features.Orders.Order", b =>

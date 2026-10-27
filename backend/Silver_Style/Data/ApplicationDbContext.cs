@@ -27,7 +27,7 @@ namespace Silver_Style.Data
             modelBuilder.Entity<Employee>().HasIndex(e => e.Email).IsUnique();
             modelBuilder.Entity<Employee>().HasIndex(e => e.Password).IsUnique();
 
-            modelBuilder.Entity<OrderItem>().HasKey(oi => new { oi.Order_Id, oi.Product_Id });
+            modelBuilder.Entity<OrderItem>().HasKey(oi => new { oi.Id, oi.ProductId });
 
             modelBuilder.Entity<Department>().HasData(
                 new ProductType
